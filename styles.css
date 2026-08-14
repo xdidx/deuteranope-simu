@@ -1,0 +1,815 @@
+/* ==========================================================================
+   Générateur d'Ishihara - Stylesheet (Modern Glassmorphism & Responsive CSS)
+   ========================================================================== */
+
+/* 1. Global Variables & Base Resets */
+:root {
+    --bg-gradient: radial-gradient(circle at top left, #121822 0%, #0d1017 100%);
+    --card-bg: rgba(23, 32, 47, 0.65);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    
+    --primary-color: #3b82f6; /* Modern Blue */
+    --primary-hover: #2563eb;
+    --secondary-color: rgba(255, 255, 255, 0.1);
+    --secondary-hover: rgba(255, 255, 255, 0.18);
+    
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+    
+    /* Ishihara Accent Colors */
+    --color-red: #ef4444;
+    --color-orange: #f97316;
+    --color-green: #10b981;
+    
+    --radius-lg: 16px;
+    --radius-md: 8px;
+    --radius-sm: 4px;
+    
+    --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* 2. Main Layout Container */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* 3. Header Styling */
+.app-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--card-shadow);
+}
+
+.header-logo {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.logo-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.logo-circle.red { background: var(--color-red); box-shadow: 0 0 10px rgba(239, 68, 68, 0.6); }
+.logo-circle.orange { background: var(--color-orange); box-shadow: 0 0 10px rgba(249, 115, 22, 0.6); }
+.logo-circle.green { background: var(--color-green); box-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
+
+.header-text h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    background: linear-gradient(to right, #ffffff, #9ca3af);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-text .subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.15rem;
+}
+
+/* Badges */
+.badge {
+    margin-left: auto;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-deutan {
+    background: rgba(249, 115, 22, 0.15);
+    color: #fdba74;
+    border: 1px solid rgba(249, 115, 22, 0.3);
+    box-shadow: 0 0 15px rgba(249, 115, 22, 0.1);
+}
+
+/* 4. Main Workspace (Grid layout) */
+.app-workspace {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (max-width: 950px) {
+    .app-workspace {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Glassmorphism Card Base */
+.glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 1.5rem;
+    transition: var(--transition-smooth);
+}
+
+/* 5. Configuration Sidebar Styling */
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.control-panel h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.config-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding-bottom: 1.25rem;
+}
+
+.config-group:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0.25rem;
+}
+
+.config-group h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Tabs */
+.tabs-container {
+    display: flex;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 0.25rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: calc(var(--radius-md) - 2px);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.tab-btn:hover {
+    color: var(--text-primary);
+}
+
+.tab-btn.active {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Tab Contents */
+.tab-content {
+    display: none;
+    flex-direction: column;
+    gap: 0.75rem;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.tab-content.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form Inputs */
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.input-wrapper-row {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.half-width {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+input[type="text"], select, input[type="number"] {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    padding: 0.6rem 0.75rem;
+    font-size: 0.9rem;
+    outline: none;
+    transition: var(--transition-smooth);
+    width: 100%;
+}
+
+input[type="text"]:focus, select:focus, input[type="number"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Ranges */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    outline: none;
+    margin: 0.5rem 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+    transition: var(--transition-smooth);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: white;
+}
+
+.range-val {
+    align-self: flex-end;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: -0.25rem;
+}
+
+/* Shape Selector Grid */
+.shape-selector {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.shape-btn {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    font-size: 1.25rem;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.shape-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.shape-btn.active {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+}
+
+/* Sketchpad Drawing Canvas */
+.sketchpad-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#sketchpad {
+    background: #000;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    cursor: crosshair;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.05);
+    touch-action: none; /* Prevents scrolling on mobile while drawing */
+}
+
+.sketchpad-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.sketchpad-tip {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+/* Palette Selector Options */
+.palette-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.palette-option {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.65rem;
+    border-radius: var(--radius-md);
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--card-border);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.palette-option:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.palette-option.active {
+    background: rgba(59, 130, 246, 0.08);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.palette-preview {
+    display: flex;
+    gap: 2px;
+    padding: 2px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.palette-preview span {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: block;
+}
+
+.palette-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.palette-option.active .palette-label {
+    color: var(--text-primary);
+}
+
+/* Advanced Accordion */
+.accordion-toggle {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.25rem 0;
+    outline: none;
+}
+
+.accordion-toggle:hover {
+    color: var(--text-primary);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease-out;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.accordion-content.open {
+    max-height: 300px; /* Adjust if content grows */
+    margin-top: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    border: none;
+    outline: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(29, 78, 216, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(29, 78, 216, 0.5);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+    color: var(--text-primary);
+    border: 1px solid var(--card-border);
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-hover);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn-sm {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+}
+
+.btn-lg {
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.btn-icon-only {
+    padding: 0.5rem;
+    aspect-ratio: 1;
+}
+
+/* Loading Spinner */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 6. Display Area Styling (Canvas & Controls) */
+.display-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.canvas-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* View Mode Toggles */
+.view-modes {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.35rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--card-border);
+}
+
+.view-mode-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.65rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: calc(var(--radius-lg) - 4px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    transition: var(--transition-smooth);
+}
+
+.view-mode-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.view-mode-btn.active {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.view-mode-btn .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.view-mode-btn .dot.normal { background: #3b82f6; box-shadow: 0 0 6px #3b82f6; }
+.view-mode-btn .dot.deutan { background: #f59e0b; box-shadow: 0 0 6px #f59e0b; }
+.view-mode-btn .dot.variant { background: #10b981; box-shadow: 0 0 6px #10b981; }
+
+/* Canvas Rendering Frame */
+.canvas-wrapper {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    background: #0d1117;
+    border-radius: 50%; /* Rounded frame for Ishihara plates */
+    border: 6px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.8);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#ishihara-canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #000;
+    transition: filter 0.1s linear;
+}
+
+@media (max-width: 500px) {
+    .canvas-wrapper {
+        width: 320px;
+        height: 320px;
+    }
+}
+
+/* Watermark/Loading Overlay */
+.canvas-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(13, 17, 23, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.canvas-overlay span {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* Real-time slider (Under Canvas) */
+.canvas-controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.slider-container {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.85rem 1.15rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--card-border);
+    animation: slideDown 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slider-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
+
+.slider-label-row label {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.slider-label-row span {
+    font-size: 0.8rem;
+    color: #f59e0b;
+    font-weight: 700;
+}
+
+.slider-ticks {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.hidden-control {
+    display: none !important;
+}
+
+/* Explanation Panel */
+.mode-explanation {
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid var(--primary-color);
+    padding: 0.85rem 1rem;
+    font-size: 0.825rem;
+    color: var(--text-secondary);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    line-height: 1.45;
+}
+
+/* Action Buttons bar */
+.action-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.action-buttons .btn-secondary {
+    flex: 1;
+    padding: 0.75rem;
+}
+
+/* 7. Self-test logging card */
+.test-log-card {
+    border-left: 3px solid #10b981;
+}
+
+.test-log-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #10b981;
+}
+
+.test-log-content {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    padding: 0.75rem;
+    font-family: "Courier New", monospace;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    max-height: 140px;
+    overflow-y: auto;
+    color: #34d399;
+}
+
+/* 8. Educational Info Block (Footer) */
+.app-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.app-info h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 0.75rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+}
+
+.info-col h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.65rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.info-col p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.85rem;
+    text-align: justify;
+}
+
+.info-col p.highlight {
+    background: rgba(16, 185, 129, 0.06);
+    border: 1px dashed rgba(16, 185, 129, 0.2);
+    border-radius: var(--radius-md);
+    padding: 0.75rem;
+    color: #a7f3d0;
+    text-align: left;
+}
+
+.author-note {
+    text-align: center;
+    border-top: 1px solid var(--card-border);
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
