@@ -98,6 +98,17 @@ export class CirclePacker {
                 equalizedColor = [...originalColor];
             }
 
+            // Pre-calculate background equivalent color (for simulation fading)
+            let bgEquivalentColor;
+            if (isSymbol) {
+                // If it is a symbol circle, its background equivalent is a background color of the same luminance
+                const randomBgColor = palette.backgroundColors[Math.floor(Math.random() * palette.backgroundColors.length)];
+                bgEquivalentColor = matchLuminance(luminance, randomBgColor);
+            } else {
+                // Background circle equivalent is just itself
+                bgEquivalentColor = [...originalColor];
+            }
+
             circles.push({
                 x,
                 y,
@@ -105,6 +116,7 @@ export class CirclePacker {
                 isSymbol,
                 originalColor,
                 equalizedColor,
+                bgEquivalentColor,
                 luminance
             });
         }

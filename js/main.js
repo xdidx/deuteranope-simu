@@ -4,7 +4,7 @@
  * ==========================================================================
  */
 
-import { PALETTES, simulateDeuteranopia, getRelativeLuminance } from './color-utils.js';
+import { PALETTES, getRelativeLuminance } from './color-utils.js';
 import { SymbolRenderer } from './symbol-renderer.js';
 import { CirclePacker } from './circle-packing.js';
 
@@ -21,7 +21,9 @@ const state = {
     density: 6000,
     minR: 2.5,
     maxR: 9,
-    severity: 60 // 0-100%
+    severity: 60, // 0-100%
+    alwaysRandomize: false,
+    darkTransformRate: 50
 };
 
 // UI Elements & Canvas Helpers
@@ -234,6 +236,22 @@ function bindEvents() {
     // 8. Generate Button Click
     document.getElementById('generate-plate').addEventListener('click', generatePlate);
 
+    // 8b. Randomize options
+    document.getElementById('randomize-text').addEventListener('click', randomizeSymbolInput);
+    
+    const alwaysRandomizeCheckbox = document.getElementById('always-randomize');
+    alwaysRandomizeCheckbox.addEventListener('change', () => {
+        state.alwaysRandomize = alwaysRandomizeCheckbox.checked;
+    });
+
+    const darkTransformSlider = document.getElementById('dark-transform-slider');
+    const darkTransformVal = document.getElementById('dark-transform-val');
+    darkTransformSlider.addEventListener('input', () => {
+        state.darkTransformRate = parseInt(darkTransformSlider.value);
+        darkTransformVal.textContent = `${state.darkTransformRate}%`;
+        drawPlateOnCanvas();
+    });
+
     // 9. Download PNG Button Click
     document.getElementById('download-plate').addEventListener('click', downloadPlate);
 
@@ -242,10 +260,35 @@ function bindEvents() {
 }
 
 /**
+ * Picks a random single/double digit or letter inspired by classic Ishihara plates
+ */
+function getRandomSymbol() {
+    const symbols = ['2', '3', '5', '6', '7', '8', '9', '12', '15', '16', '26', '29', '35', '42', '45', '73', '74', 'A', 'E', 'H', 'K', 'L', 'N', 'R', 'X', 'Y'];
+    return symbols[Math.floor(Math.random() * symbols.length)];
+}
+
+/**
+ * Mutates the input and global state to a new random symbol
+ */
+function randomizeSymbolInput() {
+    const nextSymbol = getRandomSymbol();
+    state.symbolText = nextSymbol;
+    const textInput = document.getElementById('symbol-text');
+    if (textInput) {
+        textInput.value = nextSymbol;
+    }
+}
+
+/**
  * Renders the chosen symbol, packs the circles, and paints the canvas.
  * Handles blocking delays gracefully with loading indicators.
  */
 function generatePlate() {
+    // If alwaysRandomize is checked and we are in the text tab, randomize character before generating
+    if (state.symbolType === 'text' && state.alwaysRandomize) {
+        randomizeSymbolInput();
+    }
+
     const genBtn = document.getElementById('generate-plate');
     const spinner = genBtn.querySelector('.spinner');
     const btnText = genBtn.querySelector('.btn-text');
@@ -323,8 +366,22 @@ function drawPlateOnCanvas() {
         } else if (state.viewMode === 'equalized') {
             rgb = c.equalizedColor;
         } else if (state.viewMode === 'simulated') {
-            // Pass the original color through the deutan simulation matrix
-            rgb = simulateDeuteranopia(c.originalColor[0], c.originalColor[1], c.originalColor[2], severityFactor);
+            // Apply proportional interpolation based on dark vs light circle categories
+            let interpolationFactor;
+            
+            if (c.isSymbol && c.luminance < 0.16) {
+                // Dark symbol circles are scaled down by the darkTransformRate percentage
+                interpolationFactor = severityFactor * (state.darkTransformRate / 100);
+            } else {
+                // Light circles or background circles undergo full main severity interpolation
+                interpolationFactor = severityFactor;
+            }
+
+            rgb = [
+                Math.max(0, Math.min(255, Math.round(c.originalColor[0] * (1 - interpolationFactor) + c.bgEquivalentColor[0] * interpolationFactor))),
+                Math.max(0, Math.min(255, Math.round(c.originalColor[1] * (1 - interpolationFactor) + c.bgEquivalentColor[1] * interpolationFactor))),
+                Math.max(0, Math.min(255, Math.round(c.originalColor[2] * (1 - interpolationFactor) + c.bgEquivalentColor[2] * interpolationFactor)))
+            ];
         }
         
         ctx.fillStyle = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
@@ -345,7 +402,7 @@ function updateExplanation() {
             box.innerHTML = `<strong>Vue Normale :</strong> La plaque d'Ishihara standard. Le symbole se détache nettement en teintes chaudes (rouge/orange) sur un fond de teintes froides (vert). Pour une personne ayant une vision normale, le symbole saute aux yeux.`;
             break;
         case 'simulated':
-            box.innerHTML = `<strong>Simulation de Deutéranomalie :</strong> Simule en temps réel ce que voit un daltonien en fonction du niveau de sévérité choisi. L'orange et le vert convergent vers un ton ocre/jaune neutre uniforme, rendant le symbole de plus en plus difficile voire impossible à lire.`;
+            box.innerHTML = `<strong>Simulation de Deutéranomalie :</strong> Les verts clairs de la plaque se transforment physiquement en orange (ou inversement selon la palette) au fur et à mesure que la sévérité augmente. À 100 %, les deux couleurs fusionnent complètement en une seule teinte, ne laissant visibles que les ronds ayant un fort contraste de luminosité.`;
             break;
         case 'equalized':
             box.innerHTML = `<strong>Variante Équivalence Vert (Luminance Égalisée) :</strong> Chaque cercle orange du symbole est remplacé par un cercle vert ayant la <strong>même luminance relative exacte</strong>. Un normovoyant ne verra absolument aucun symbole (vert sur vert), tandis qu'un daltonien verra cette plaque de manière quasiment identique à la plaque originale !`;

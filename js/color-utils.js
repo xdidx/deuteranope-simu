@@ -105,45 +105,52 @@ export function simulateDeuteranopia(r, g, b, severity = 1.0) {
 export const PALETTES = {
     'deutan-standard': {
         name: 'Standard (Rouge-Orange sur Vert)',
+        shiftSource: 'background', // background (green) shifts
+        shiftTarget: 'symbol',     // to symbol (orange)
         symbolColors: [
-            [225, 85, 65],   // Orange vif
-            [238, 120, 92],  // Saumon clair
-            [191, 75, 53],   // Rouge rouille
-            [215, 105, 80],  // Corail chaleureux
-            [145, 60, 45],   // Brun-rouge foncé
-            [242, 148, 120]  // Pêche claire
+            [185, 105, 55],   // Terracotta moyen
+            [205, 125, 70],   // Orange-brun clair
+            [145, 75, 40],    // Brun rouge foncé
+            [225, 145, 85],   // Pêche-ocre clair
+            [125, 65, 35],    // Chocolat noir
+            [165, 90, 50]     // Brique
         ],
         backgroundColors: [
-            [75, 125, 85],   // Vert feuillage moyen
-            [120, 165, 115], // Vert sauge doux
-            [50, 100, 68],   // Vert mousse foncé
-            [148, 188, 138], // Vert clair jaunâtre
-            [65, 120, 105],  // Vert sarcelle
-            [110, 150, 135]  // Vert bleuâtre doux
+            [125, 125, 65],   // Olive moyen
+            [145, 145, 80],   // Olive clair
+            [105, 110, 55],   // Vert mousse sombre
+            [165, 165, 95],   // Olive très clair
+            [115, 125, 100],  // Vert sauge grisâtre
+            [135, 145, 120],  // Vert lichen clair
+            [95, 105, 80]     // Vert forêt sourd
         ]
     },
     'deutan-reverse': {
         name: 'Inversée (Vert sur Rouge-Orange)',
-        // Just swaps symbol and background of standard deutan
+        shiftSource: 'symbol',     // symbol (green) shifts
+        shiftTarget: 'background', // to background (orange)
         symbolColors: [
-            [75, 125, 85],
-            [120, 165, 115],
-            [50, 100, 68],
-            [148, 188, 138],
-            [65, 120, 105],
-            [110, 150, 135]
+            [125, 125, 65],   // Olive moyen
+            [145, 145, 80],   // Olive clair
+            [105, 110, 55],   // Vert mousse sombre
+            [165, 165, 95],   // Olive très clair
+            [115, 125, 100],  // Vert sauge grisâtre
+            [135, 145, 120],  // Vert lichen clair
+            [95, 105, 80]     // Vert forêt sourd
         ],
         backgroundColors: [
-            [225, 85, 65],
-            [238, 120, 92],
-            [191, 75, 53],
-            [215, 105, 80],
-            [145, 60, 45],
-            [242, 148, 120]
+            [185, 105, 55],   // Terracotta moyen
+            [205, 125, 70],   // Orange-brun clair
+            [145, 75, 40],    // Brun rouge foncé
+            [225, 145, 85],   // Pêche-ocre clair
+            [125, 65, 35],    // Chocolat noir
+            [165, 90, 50]     // Brique
         ]
     },
     'tritan': {
         name: 'Tritan (Bleu sur Rose-Violet)',
+        shiftSource: 'symbol',     // symbol (blue) shifts
+        shiftTarget: 'background', // to background (pink)
         symbolColors: [
             [50, 95, 160],   // Bleu azur
             [75, 130, 210],  // Bleu ciel

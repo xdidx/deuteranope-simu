@@ -43,7 +43,14 @@
                     <div class="tab-content active" id="tab-text">
                         <div class="input-wrapper">
                             <label for="symbol-text">Chiffre ou Lettre (max 2) :</label>
-                            <input type="text" id="symbol-text" value="5" maxlength="2" placeholder="5">
+                            <div class="input-with-action">
+                                <input type="text" id="symbol-text" value="5" maxlength="2" placeholder="5">
+                                <button type="button" id="randomize-text" class="btn btn-secondary" title="Générer un caractère aléatoire">🎲</button>
+                            </div>
+                        </div>
+                        <div class="input-wrapper-checkbox">
+                            <input type="checkbox" id="always-randomize" class="checkbox-input">
+                            <label for="always-randomize" class="checkbox-label">A chaque clic, choisir au hasard</label>
                         </div>
                         <div class="input-wrapper">
                             <label for="font-family">Police :</label>
@@ -188,6 +195,17 @@
                                 <span>0% (Normale)</span>
                                 <span>50% (Modérée)</span>
                                 <span>100% (Deutéranopie)</span>
+                            </div>
+                            <div class="slider-container-sub" style="margin-top: 1.25rem; border-top: 1px dashed rgba(255,255,255,0.06); padding-top: 0.75rem;">
+                                <div class="slider-label-row">
+                                    <label for="dark-transform-slider">Fusion des ronds foncés :</label>
+                                    <span id="dark-transform-val" style="color: #60a5fa; font-weight: bold;">50%</span>
+                                </div>
+                                <input type="range" id="dark-transform-slider" min="0" max="100" value="50">
+                                <div class="slider-ticks">
+                                    <span>0% (Préservés)</span>
+                                    <span>100% (Fusion totale)</span>
+                                </div>
                             </div>
                         </div>
 
