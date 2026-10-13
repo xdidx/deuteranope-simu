@@ -11,8 +11,8 @@ import { CirclePacker } from './circle-packing.js';
 // Global App State
 const state = {
     currentCircles: [],
-    viewMode: 'normal', // 'normal' | 'simulated' | 'equalized'
-    paletteId: 'deutan-standard',
+    viewMode: 'simulated', // 'normal' | 'simulated' | 'equalized'
+    paletteId: 'deutan-reverse',
     symbolType: 'text', // 'text' | 'shape' | 'draw'
     symbolText: '5',
     fontFamily: 'Arial, sans-serif',
@@ -21,9 +21,9 @@ const state = {
     density: 6000,
     minR: 2.5,
     maxR: 9,
-    severity: 60, // 0-100%
+    severity: 80, // 0-100%
     alwaysRandomize: false,
-    darkTransformRate: 50
+    darkTransformRate: 30
 };
 
 // UI Elements & Canvas Helpers

@@ -92,7 +92,7 @@
                 <div class="config-group">
                     <h3>2. Palette de Couleurs</h3>
                     <div class="palette-selector">
-                        <div class="palette-option active" data-palette="deutan-standard">
+                        <div class="palette-option" data-palette="deutan-standard">
                             <div class="palette-preview">
                                 <span style="background: #e05a47;"></span>
                                 <span style="background: #ef8b6c;"></span>
@@ -101,7 +101,7 @@
                             </div>
                             <span class="palette-label">Standard (Symbole Orange / Fond Vert)</span>
                         </div>
-                        <div class="palette-option" data-palette="deutan-reverse">
+                        <div class="palette-option active" data-palette="deutan-reverse">
                             <div class="palette-preview">
                                 <span style="background: #4e825a;"></span>
                                 <span style="background: #7ca878;"></span>
@@ -161,10 +161,10 @@
                 <div class="canvas-card glass-card">
                     <!-- View Tabs / Toggles -->
                     <div class="view-modes">
-                        <button class="view-mode-btn active" data-mode="normal">
+                        <button class="view-mode-btn" data-mode="normal">
                             <span class="dot normal"></span> Vision Normale
                         </button>
-                        <button class="view-mode-btn" data-mode="simulated">
+                        <button class="view-mode-btn active" data-mode="simulated">
                             <span class="dot deutan"></span> Simulation Deutéranomalie
                         </button>
                         <button class="view-mode-btn" data-mode="equalized">
@@ -185,12 +185,12 @@
                     <!-- Real-time Controls under Canvas -->
                     <div class="canvas-controls">
                         <!-- Simulation slider, visible when 'simulated' is active -->
-                        <div id="simulation-slider-container" class="slider-container hidden-control">
+                        <div id="simulation-slider-container" class="slider-container">
                             <div class="slider-label-row">
                                 <label for="severity-slider">Sévérité du daltonisme :</label>
-                                <span id="severity-val">60% (Deutéranomalie)</span>
+                                <span id="severity-val">80% (Deutéranomalie)</span>
                             </div>
-                            <input type="range" id="severity-slider" min="0" max="100" value="60">
+                            <input type="range" id="severity-slider" min="0" max="100" value="80">
                             <div class="slider-ticks">
                                 <span>0% (Normale)</span>
                                 <span>50% (Modérée)</span>
@@ -199,9 +199,9 @@
                             <div class="slider-container-sub" style="margin-top: 1.25rem; border-top: 1px dashed rgba(255,255,255,0.06); padding-top: 0.75rem;">
                                 <div class="slider-label-row">
                                     <label for="dark-transform-slider">Fusion des ronds foncés :</label>
-                                    <span id="dark-transform-val" style="color: #60a5fa; font-weight: bold;">50%</span>
+                                    <span id="dark-transform-val" style="color: #60a5fa; font-weight: bold;">30%</span>
                                 </div>
-                                <input type="range" id="dark-transform-slider" min="0" max="100" value="50">
+                                <input type="range" id="dark-transform-slider" min="0" max="100" value="30">
                                 <div class="slider-ticks">
                                     <span>0% (Préservés)</span>
                                     <span>100% (Fusion totale)</span>
@@ -211,7 +211,7 @@
 
                         <!-- Info/Explanation text linked to the current view mode -->
                         <div class="mode-explanation" id="mode-explanation-box">
-                            <strong>Vue Normale :</strong> La plaque d'Ishihara standard. Le symbole rouge/orange se détache nettement sur le fond vert pour les personnes ayant une vision normale des couleurs.
+                            <strong>Simulation de Deutéranomalie :</strong> Les verts clairs de la plaque se transforment physiquement en orange (ou inversement selon la palette) au fur et à mesure que la sévérité augmente. À 100 %, les deux couleurs fusionnent complètement en une seule teinte, ne laissant visibles que les ronds ayant un fort contraste de luminosité.
                         </div>
 
                         <!-- Action Buttons -->
